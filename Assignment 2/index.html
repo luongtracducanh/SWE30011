@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Weather Dashboard</title>
+  <style>
+    .chart-container {
+      width: 640px;
+      height: auto;
+    }
+
+    .hide {
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      width: 1px;
+      height: 1px;
+      ;
+    }
+  </style>
+  <script>
+    function AutoRefresh(t) {
+      setTimeout("location.reload(true);", t);
+    }
+    function promptAlert() {
+      var temp = "";
+      if (document.getElementById('turnOn').checked) temp += "turned on.";
+      else if (document.getElementById('turnOff').checked) temp += "turned off."
+      alert("Alert is " + temp);
+    }
+  </script>
+</head>
+
+<body onload="JavaScrip:AutoRefresh(30000);">
+  <div class="chart-container">
+    <canvas id="mycanvas"></canvas>
+  </div>
+
+  <!-- javascript -->
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/Chart.min.js"></script>
+  <script type="text/javascript" src="js/script.js"></script>
+
+  <!-- display data analysis  -->
+  <p>Highest temperature: <span id="maxTemp"></span></p>
+  <p>Lowest temperature: <span id="minTemp"></span></p>
+  <p>Highest humidity: <span id="maxHumid"></span></p>
+  <p>Lowest humidity: <span id="minHumid"></span></p>
+  <p>Average temperature: <span id="avgTemp"></span></p>
+  <p>Average humidity: <span id="avgHumid"></span></p>
+
+  <!-- button to send command to Arduino -->
+  <iframe name="hiddenFrame" class="hide"></iframe>
+  <form method="POST" action="php/alert.php" name="form" target="hiddenFrame">
+    <h3>Choose what to do with the alert:</h3>
+    <input type="radio" name="Value" value=1 id="turnOn" />
+    <label>Turn on</label>
+    <input type="radio" name="Value" value=0 id="turnOff" checked="checked" />
+    <label>Turn off</label>
+    <input type="submit" value="Submit" onclick="promptAlert()" />
+  </form>
+</body>
+
+</html>
