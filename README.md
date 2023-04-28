@@ -1,2 +1,2 @@
 # SWE30011
-IoT Programming (Swinburne)
+Assignments and tutorials of SWE30011 - IoT Programming (January 2023)
